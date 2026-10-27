@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fcfcfa;
+  --bg-elev: #f4f4f0;
+  --fg: #14161c;
+  --fg-muted: #676b76;
+  --border: #14161c1a;
+  --border-strong: #14161c3a;
+  --accent: #2563eb;
+  --accent-fg: #ffffff;
+  --accent-edge: #1e40af;
+  --danger: #d1343f;
+  --success: #15803d;
+  --warning: #d97706;
+}
+
+.dark {
+  --bg: #0e1116;
+  --bg-elev: #161a21;
+  --fg: #eceef2;
+  --fg-muted: #949aa6;
+  --border: #ffffff14;
+  --border-strong: #ffffff2e;
+  --accent: #5b9dff;
+  --accent-fg: #0b1220;
+  --accent-edge: #2f68d0;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--bg-elev);
+  --color-card-foreground: var(--fg);
+  --color-muted: var(--bg-elev);
+  --color-muted-foreground: var(--fg-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-foreground: var(--accent-fg);
+  --color-accent-soft: color-mix(in oklch, var(--accent) 10%, transparent);
+  --color-accent-edge: var(--accent-edge);
+  --color-accent-glow: color-mix(in oklch, var(--accent) 30%, transparent);
+  --color-positive: var(--success);
+  --color-success: var(--success);
+  --color-negative: var(--danger);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-ring: var(--accent);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vantage utilities */
+.bg-dotgrid {
+  background-image: radial-gradient(
+    color-mix(in oklch, var(--fg) 16%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+.bg-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklch, var(--fg) 8%, transparent) 0,
+    color-mix(in oklch, var(--fg) 8%, transparent) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+}
+
+.hero-glow {
+  background: radial-gradient(
+    70% 100% at 50% 0%,
+    color-mix(in oklch, var(--accent) 14%, transparent),
+    transparent 72%
+  );
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.grow-y {
+  transform-origin: bottom;
+  animation: grow-y 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elev) 25%,
+    var(--border-strong) 50%,
+    var(--bg-elev) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .grow-y,
+  .skeleton {
+    animation: none;
+  }
+}
+
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+.letter-in {
+  animation: letter-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
